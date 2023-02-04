@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,13 +17,47 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: Welcome_page(),
+      home: WelcomePage(),
     );
   }
 }
 
-class Welcome_page extends StatelessWidget {
-  const Welcome_page({
+//------------------------------------------------------------------------------ RootPage
+class RootPage extends StatelessWidget {
+  const RootPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          final user = snapshot.data;
+
+          if (user == null) {
+            return Scaffold(
+              body: Center(
+                child: Column(
+                  children: [Text('Jesteś nie zalogowany')],
+                ),
+              ),
+            );
+          }
+          return Scaffold(
+            body: Center(
+              child: Column(
+                children: [Text('Jesteś zalogowany jako ${user.email}')],
+              ),
+            ),
+          );
+        });
+  }
+}
+
+//------------------------------------------------------------------------------ WelcomePage
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({
     super.key,
   });
 

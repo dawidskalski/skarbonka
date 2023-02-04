@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "392684285715",
+    "project_id": "skarbonka01",
+    "storage_bucket": "skarbonka01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392684285715:android:055a8ccb0cd16488f934e6",
+        "android_client_info": {
+          "package_name": "com.example.skarbonka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392684285715-86otlqu2fl7s3c0gt42025lce86kfiet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1fga00-dHfFBmVsF97V4g9r9ifOs9fMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392684285715-86otlqu2fl7s3c0gt42025lce86kfiet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
