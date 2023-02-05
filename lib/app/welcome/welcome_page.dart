@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skarbonka/app/login/login_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({
@@ -37,7 +38,10 @@ class WelcomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (_) => LoginPage()));
+                  },
                   icon: Icon(
                     Icons.arrow_forward,
                     color: Colors.orange,
