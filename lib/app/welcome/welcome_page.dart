@@ -27,17 +27,16 @@ class WelcomePage extends StatelessWidget {
                   style: GoogleFonts.actor(
                       fontSize: 40, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 15),
                 Text(
-                  'Nazywam się sakorbonka! Jestem tu po to aby pomóc ci w kontrolowaniu twoich wydatków. Każde pieniąki które wydajesz na: zakupy, rachunki oraz tym podobne rzeczy, wrzucaj do mnie a dzieki temu będizesz na bierząco śledził ile wydałeś w danynm miesiącu. Dzieki mojej wspanialej pamięci mogę ci pokazywac ile zaoszczędzisz w danym miesiącu, wystarczy, że powiesz mi ile zarabiasz i ile chciał być zaoszczędzić. Także nie ma na co czekać, zaczynajmy !',
+                  'Nazywam się sakorbonka! Jestem tu po to aby pomóc ci w kontrolowaniu twoich wydatków.',
                   style: GoogleFonts.lato(fontSize: 15),
                 ),
-                Image(
-                  image: AssetImage('images/piggy.png'),
-                  width: 250,
+                CircleAvatar(
+                  backgroundImage: AssetImage('images/piggy.png'),
+                  radius: 100,
                 ),
-                const SizedBox(height: 40),
                 IconButton(
+                  iconSize: 37,
                   onPressed: () {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (_) => LoginPage()));
@@ -46,7 +45,6 @@ class WelcomePage extends StatelessWidget {
                     Icons.arrow_forward,
                     color: Colors.orange,
                   ),
-                  iconSize: 50,
                 )
               ],
             ),

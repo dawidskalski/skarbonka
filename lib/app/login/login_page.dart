@@ -1,17 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:skarbonka/app/home/home_page.dart';
-import 'package:skarbonka/app/login/login_page.dart';
-import 'package:skarbonka/app/welcome/welcome_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({
     super.key,
   });
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -24,38 +28,42 @@ class LoginPage extends StatelessWidget {
             children: [
               Text('Zaloguj sie !', style: GoogleFonts.nunito(fontSize: 35)),
               SizedBox(height: 20),
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundImage: AssetImage('images/piggy.png'),
                 radius: 80,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
-                controller: emailController,
-                decoration: InputDecoration(
+                controller: widget.emailController,
+                decoration: const InputDecoration(
                     hintText: 'E-mail',
                     border: OutlineInputBorder(),
                     label: Text('Login')),
               ),
               const SizedBox(height: 10),
               TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
+                controller: widget.passwordController,
+                decoration: const InputDecoration(
                     hintText: 'Password',
                     border: OutlineInputBorder(),
                     label: Text('Password')),
                 obscureText: true,
               ),
-              TextButton(
-                  onPressed: () {
-                    FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: emailController.toString(),
-                      password: passwordController.toString(),
-                    );
-                  },
-                  child: Text('Zarejestruj się ')),
+              Text(errorMessage),
               IconButton(
-                onPressed: () {},
-                icon: Icon(
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: widget.emailController.text,
+                      password: widget.passwordController.text,
+                    );
+                  } catch (error) {
+                    setState(() {
+                      errorMessage = error.toString();
+                    });
+                  }
+                },
+                icon: const Icon(
                   Icons.arrow_forward,
                   color: Colors.orange,
                 ),
