@@ -13,7 +13,7 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('skarbonka'),
+        title: Text('#Skarbonka', style: GoogleFonts.nunitoSans()),
       ),
       body: Center(
         child: Padding(

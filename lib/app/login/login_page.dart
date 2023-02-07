@@ -22,6 +22,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          '#Skarbonka',
+          style: GoogleFonts.nunitoSans(),
+        ),
+        backgroundColor: Colors.orange,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
