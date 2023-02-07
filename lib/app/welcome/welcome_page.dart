@@ -40,13 +40,13 @@ class WelcomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 IconButton(
-                  iconSize: 37,
+                  iconSize: 50,
                   onPressed: () {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (_) => RootPage()));
                   },
                   icon: Icon(
-                    Icons.arrow_forward,
+                    Icons.arrow_right_alt_sharp,
                     color: Colors.orange,
                   ),
                 )

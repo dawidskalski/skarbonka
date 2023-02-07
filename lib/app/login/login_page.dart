@@ -37,7 +37,9 @@ class _LoginPageState extends State<LoginPage> {
                 radius: 80,
               ),
               const SizedBox(height: 20),
-              if (isCreatingAccount == true) ...[
+
+              /*  ------------------------------------------------- Dodawanie imienia                        
+               if (isCreatingAccount == true) ...[
                 TextField(
                   controller: widget.name,
                   decoration: InputDecoration(
@@ -46,6 +48,8 @@ class _LoginPageState extends State<LoginPage> {
                       label: Text('name')),
                 ),
               ],
+              */
+
               const SizedBox(height: 10),
               TextField(
                 controller: widget.emailController,
