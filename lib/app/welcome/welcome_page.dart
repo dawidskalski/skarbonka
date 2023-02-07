@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skarbonka/app/login/login_page.dart';
+import 'package:skarbonka/main.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({
@@ -27,19 +28,22 @@ class WelcomePage extends StatelessWidget {
                   style: GoogleFonts.actor(
                       fontSize: 40, fontWeight: FontWeight.bold),
                 ),
+                const SizedBox(height: 20),
                 Text(
                   'Nazywam się sakorbonka! Jestem tu po to aby pomóc ci w kontrolowaniu twoich wydatków.',
                   style: GoogleFonts.lato(fontSize: 15),
                 ),
+                const SizedBox(height: 20),
                 CircleAvatar(
                   backgroundImage: AssetImage('images/piggy.png'),
                   radius: 100,
                 ),
+                const SizedBox(height: 40),
                 IconButton(
                   iconSize: 37,
                   onPressed: () {
                     Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) => LoginPage()));
+                        .push(MaterialPageRoute(builder: (_) => RootPage()));
                   },
                   icon: Icon(
                     Icons.arrow_forward,

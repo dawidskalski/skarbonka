@@ -4,8 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:skarbonka/app/home/home_page.dart';
 import 'package:skarbonka/app/login/login_page.dart';
 import 'package:skarbonka/app/welcome/welcome_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:skarbonka/firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -45,6 +51,3 @@ class RootPage extends StatelessWidget {
         });
   }
 }
-
-
-

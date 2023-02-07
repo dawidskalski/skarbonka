@@ -9,6 +9,7 @@ class LoginPage extends StatefulWidget {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final name = TextEditingController();
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -16,23 +17,36 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var errorMessage = '';
+  var isCreatingAccount = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Zaloguj sie !', style: GoogleFonts.nunito(fontSize: 35)),
+              Text(isCreatingAccount == false
+                  ? 'Zaloguj sie !'
+                  : 'Zarejestruj się'),
               SizedBox(height: 20),
               const CircleAvatar(
                 backgroundImage: AssetImage('images/piggy.png'),
                 radius: 80,
               ),
               const SizedBox(height: 20),
+              if (isCreatingAccount == true) ...[
+                TextField(
+                  controller: widget.name,
+                  decoration: InputDecoration(
+                      hintText: 'What your name ?',
+                      border: OutlineInputBorder(),
+                      label: Text('name')),
+                ),
+              ],
+              const SizedBox(height: 10),
               TextField(
                 controller: widget.emailController,
                 decoration: const InputDecoration(
@@ -44,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 controller: widget.passwordController,
                 decoration: const InputDecoration(
-                    hintText: 'Password',
+                    hintText: 'Choose your password',
                     border: OutlineInputBorder(),
                     label: Text('Password')),
                 obscureText: true,
@@ -52,15 +66,27 @@ class _LoginPageState extends State<LoginPage> {
               Text(errorMessage),
               IconButton(
                 onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: widget.emailController.text,
-                      password: widget.passwordController.text,
-                    );
-                  } catch (error) {
-                    setState(() {
-                      errorMessage = error.toString();
-                    });
+                  if (isCreatingAccount == false) {
+                    try {
+                      await FirebaseAuth.instance.signInWithEmailAndPassword(
+                        email: widget.emailController.text,
+                        password: widget.passwordController.text,
+                      );
+                    } catch (error) {
+                      setState(() {
+                        errorMessage = error.toString();
+                      });
+                    }
+                  } else {
+                    try {
+                      FirebaseAuth.instance.createUserWithEmailAndPassword(
+                          email: widget.emailController.text,
+                          password: widget.passwordController.text);
+                    } catch (error) {
+                      setState(() {
+                        errorMessage = error.toString();
+                      });
+                    }
                   }
                 },
                 icon: const Icon(
@@ -68,7 +94,28 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.orange,
                 ),
                 iconSize: 50,
-              )
+              ),
+              SizedBox(height: 20),
+              if (isCreatingAccount == false) ...[
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isCreatingAccount = true;
+                    });
+                  },
+                  child: Text('Utwórz konto'),
+                )
+              ],
+              if (isCreatingAccount == true) ...[
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isCreatingAccount = false;
+                    });
+                  },
+                  child: Text('Mam już konto'),
+                )
+              ]
             ],
           ),
         ),
